@@ -58,12 +58,66 @@ public class Simulator {
 		}
 	}
 	
-	public static void read(int adr){
+	public static String read(int adr){
+		//DIRETO
+		if(map_type == 1){
+			int value = adr/cache.getBlock_size();
+			int line = value;
+			
+			if(line > cache.getLine_num()){
+				line = line % cache.getBlock_size();
+			}
+			
+			if((cache.getLines().get(line)) == value){
+				return "HIT";
+			} else{
+				cache.getLines().add(line, value);
+			}
+		}
 		
+		//TOTALMENTE ASSOCIATIVO
+		if(map_type == 2){
+			
+		}
+		//PARCIALMENTE ASSOCIATIVO
+		if(map_type == 3){
+			
+		}
+		
+		return "MISS";
 	}
 	
-	public static void write(int adr, int value){
+	public static String write(int adr, int value){
+		//DIRETO
+		if(map_type == 1){
+			int line = adr/cache.getBlock_size();
+			
+			if(line > cache.getLine_num()){
+				line = line % cache.getBlock_size();
+			}
+			
+			if((cache.getLines().get(line)) == value){
+				return "HIT";
+			} else{
+				cache.getLines().add(line, value);
+			}
+		}
 		
+		//TOTALMENTE ASSOCIATIVO
+				
+		//PARCIALMENTE ASSOCIATIVO
+		
+		return "MISS";
+	}
+	
+	public static void substitute(int adr, int value){
+		//RANDOM
+		
+		//FIFO
+		
+		//LFU
+		
+		//LRU
 	}
 	
 	public static void show(){
